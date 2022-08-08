@@ -27,4 +27,4 @@ Route.get('/', async () => {
   }
 })
 
-Route.resource('tasks', 'Tasks').apiOnly()
+Route.resource('/tasks', 'TasksController').apiOnly();

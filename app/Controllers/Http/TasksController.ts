@@ -38,7 +38,6 @@ export default class TasksController {
       status: true,
       message: "Task deleted",
       data: null
-
     }
   }
 }
