@@ -21,5 +21,10 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  return {
+    status: true,
+    message: "Tasks API Warehouse"
+  }
 })
+
+Route.resource('tasks', 'Tasks').apiOnly()

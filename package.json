@@ -28,8 +28,8 @@
   ],
   "prettier": {
     "trailingComma": "es5",
-    "semi": false,
-    "singleQuote": true,
+    "semi": true,
+    "singleQuote": false,
     "useTabs": false,
     "quoteProps": "consistent",
     "bracketSpacing": true,
