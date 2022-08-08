@@ -27,4 +27,5 @@ Route.get('/', async () => {
   }
 })
 
+Route.resource('/statuses', 'StatusesController').apiOnly();
 Route.resource('/tasks', 'TasksController').apiOnly();
