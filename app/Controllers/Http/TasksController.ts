@@ -3,18 +3,22 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Task from "App/Models/Task"
 
 export default class TasksController {
-  public async index() {
-    const tasks = await Task.all();
+  public async index({ auth }: HttpContextContract) {
+
+    const user = auth.user;
+    await user?.preload('tasks')
+
+    console.log(user)
     return {
       status: true,
       message: "Tasks fetched",
-      data: tasks
+      data: user?.tasks
     }
   }
 
-  public async store({ request }: HttpContextContract) {
+  public async store({ request, auth }: HttpContextContract) {
     const payload = request.body();
-    const task = await Task.create(payload);
+    const task = await auth.user?.related('tasks').create(payload);
 
     return {
       status: true,

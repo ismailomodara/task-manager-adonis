@@ -31,7 +31,9 @@ Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')
 Route.post('/logout', 'AuthController.logout').middleware('auth')
 
-Route.resource('/statuses', 'StatusesController').apiOnly();
+Route.resource('/statuses', 'StatusesController').apiOnly().middleware({
+  '*': 'auth'
+})
 Route.resource('/tasks', 'TasksController').apiOnly().middleware({
   '*': 'auth'
 })
