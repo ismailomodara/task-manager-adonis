@@ -1,39 +1,58 @@
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+
+import Task from "App/Models/Task"
 
 export default class TasksController {
   public async index() {
+    const tasks = await Task.all();
     return {
       status: true,
       message: "Tasks fetched",
-      data: []
+      data: tasks
     }
   }
 
-  public async store() {
+  public async store({ request }: HttpContextContract) {
+    const payload = request.body();
+    const task = await Task.create(payload);
+
     return {
       status: true,
       message: "Task created",
-      data: {}
+      data: task
     }
   }
 
-  public async show() {
+  public async show({ params }: HttpContextContract) {
+    const task = await Task.findOrFail(params.id)
+
     return {
       status: true,
       message: "Task fetched",
-      data: {}
+      data: task
     }
   }
 
-  public async update() {
+  public async update({ params, request }: HttpContextContract) {
+
+    let task = await Task.findOrFail(params.id)
+    task.title = request.body().title
+    task.description = request.body().description
+    task.dueAt = request.body().due_at
+
+    await task.save()
+
     return {
       status: true,
       message: "Task updated",
-      data: {}
+      data: task
     }
   }
 
-  public async destroy() {
+  public async destroy({ params }: HttpContextContract) {
+    let task = await Task.findOrFail(params.id)
+    await task.delete()
+
     return {
       status: true,
       message: "Task deleted",

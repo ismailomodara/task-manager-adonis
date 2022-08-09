@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('title')
       table.string('description')
       table.integer('status_id').defaultTo(2)
-      table.timestamp('due_at', { useTz: true })
+      table.timestamp('due_at', { useTz: false })
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
