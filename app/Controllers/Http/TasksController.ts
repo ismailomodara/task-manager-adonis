@@ -39,6 +39,7 @@ export default class TasksController {
     task.title = request.body().title
     task.description = request.body().description
     task.dueAt = request.body().due_at
+    task.statusId = request.body().status_id
 
     await task.save()
 
